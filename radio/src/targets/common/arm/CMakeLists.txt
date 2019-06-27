@@ -168,6 +168,8 @@ if(CROSSFIRE)
     )
 endif()
 
+add_definitions(-g)
+
 add_definitions(-DCPUARM)
 add_definitions(-DTELEMETRY_FRSKY -DTELEMETRY_FRSKY_SPORT -DGPS)
 
