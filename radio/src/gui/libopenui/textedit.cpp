@@ -78,7 +78,7 @@ void TextEdit::onKeyEvent(event_t event)
     switch (event) {
       case EVT_ROTARY_RIGHT:
       case EVT_ROTARY_LEFT:
-        v = limit(0, abs(v) + (event == EVT_ROTARY_RIGHT ? +rotencSpeed : -rotencSpeed), ZCHAR_MAX);
+        v = limit<int>(0, abs(v) + (event == EVT_ROTARY_RIGHT ? +rotencSpeed : -rotencSpeed), ZCHAR_MAX);
         if (c <= 0) v = -v;
         break;
 
