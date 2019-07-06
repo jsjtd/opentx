@@ -69,29 +69,7 @@ include_directories(${RADIO_SRC_DIRECTORY}/fonts/colorlcd gui/${GUI_DIR} gui/${G
 file(GLOB THEMES_SRC RELATIVE ${RADIO_SRC_DIRECTORY}/gui/colorlcd ${RADIO_SRC_DIRECTORY}/gui/colorlcd/themes/*.cpp)
 file(GLOB LAYOUTS_SRC RELATIVE ${RADIO_SRC_DIRECTORY}/gui/colorlcd ${RADIO_SRC_DIRECTORY}/gui/colorlcd/layouts/*.cpp)
 file(GLOB WIDGETS_SRC RELATIVE ${RADIO_SRC_DIRECTORY}/gui/colorlcd ${RADIO_SRC_DIRECTORY}/gui/colorlcd/widgets/*.cpp)
-set(GUI_SRC
-  ${GUI_SRC}
-  curves.cpp
-  bitmaps.cpp
-  radio_sdmanager.cpp
-  #  radio_hardware.cpp
-  #  model_inputs.cpp
-  #  model_mixes.cpp
-  #  model_curves.cpp
-  #  view_channels.cpp
-  #  view_logical_switches.cpp
-  #  view_about.cpp
-  #  view_text.cpp
-  #  screens_setup.cpp
-  theme.cpp
-  #  topbar.cpp
-  #  layout.cpp
-  #  widget.cpp
-  ${THEMES_SRC}
-  #  ${LAYOUTS_SRC}
-  #  ${WIDGETS_SRC}
-  rle.cpp
-  )
+
 if(DISK_CACHE)
   set(SRC ${SRC} disk_cache.cpp)
   add_definitions(-DDISK_CACHE)

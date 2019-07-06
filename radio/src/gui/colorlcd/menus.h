@@ -465,6 +465,7 @@ void insertExpo(uint8_t idx, uint8_t input);
 uint8_t getMixesCount();
 void deleteMix(uint8_t idx);
 void insertMix(uint8_t idx);
+void copyMix(uint8_t source, uint8_t dest, int8_t ch);
 
 #define MENU_X                 80
 #define MENU_W                 LCD_W-(2*MENU_X)
