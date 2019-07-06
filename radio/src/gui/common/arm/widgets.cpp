@@ -168,3 +168,4 @@ void drawSourceValue(coord_t x, coord_t y, source_t source, LcdFlags flags)
   getvalue_t value = getValue(source);
   drawSourceCustomValue(x, y, source, value, flags);
 }
+

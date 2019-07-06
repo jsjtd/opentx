@@ -90,7 +90,7 @@ int getCharWidth(uint8_t c, const uint16_t * spec)
 {
   return getFontPatternWidth(spec, getMappedChar(c));
 }
-/*
+
 void lcdPutFontPattern(coord_t x, coord_t y, const uint8_t * font, const uint16_t * spec, int index, LcdFlags flags)
 {
   coord_t offset = spec[index + 1];
@@ -98,15 +98,15 @@ void lcdPutFontPattern(coord_t x, coord_t y, const uint8_t * font, const uint16_
   if (width > 0)
     lcdDrawBitmapPattern(x, y, font, flags, offset, width);
   lcdNextPos = x + width;
-}*/
-/*
+}
+
 void lcdDrawChar(coord_t x, coord_t y, char c, LcdFlags flags)
 {
   uint32_t fontindex = FONTINDEX(flags);
   const unsigned char * font = fontsTable[fontindex];
   const uint16_t * fontspecs = fontspecsTable[fontindex];
   lcdPutFontPattern(x, y, font, fontspecs, getMappedChar(c), flags);
-}*/
+}
 
 uint8_t getFontHeight(LcdFlags flags)
 {

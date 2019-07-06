@@ -55,7 +55,7 @@ bool reachMixesLimit()
 class MixEditWindow : public Page {
   public:
     MixEditWindow(int8_t channel, uint8_t mixIndex) :
-      Page(ICON_STATS_ANALOGS),
+      Page(ICON_MODEL_MIXER),
       channel(channel),
       mixIndex(mixIndex)
     {
