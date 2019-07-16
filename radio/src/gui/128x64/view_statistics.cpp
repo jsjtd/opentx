@@ -273,7 +273,16 @@ void menuStatisticsDebug(event_t event)
   lcdDrawTextAlignedLeft(5*FH, STR_FREESTACKMINB);
   lcdDrawNumber(14*FW, 5*FH, stackAvailable(), UNSIGN) ;
 #endif
-
+  
+#if defined(DEBUG_LATENCY)
+  lcdDrawTextAlignedLeft(y, "Heartbeat");
+  if (heartbeatCapture.valid)
+    lcdDrawNumber(MENU_DEBUG_COL1_OFS, y, heartbeatCapture.count, LEFT);
+  else
+    lcdDrawText(MENU_DEBUG_COL1_OFS, y, "---");
+  y += FH;
+#endif
+  
   lcdDrawText(4*FW, 7*FH+1, STR_MENUTORESET);
   lcdInvertLastLine();
 }

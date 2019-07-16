@@ -1802,4 +1802,8 @@ extern JitterMeter<uint16_t> avgJitter[NUM_ANALOGS];
 #include "bluetooth.h"
 #endif
 
+#if defined(DEBUG_LATENCY)
+extern uint8_t latencyToggleSwitch;
+#endif
+
 #endif // _OPENTX_H_

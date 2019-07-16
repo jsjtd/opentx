@@ -45,6 +45,10 @@ audioQueue  audio;
 
 uint8_t heartbeat;
 
+#if defined(DEBUG_LATENCY)
+uint8_t latencyToggleSwitch = 0;
+#endif
+
 #if defined(OVERRIDE_CHANNEL_FUNCTION)
 safetych_t safetyCh[MAX_OUTPUT_CHANNELS];
 #endif
@@ -91,6 +95,27 @@ void watchdogSuspend(uint32_t timeout)
 }
 #endif
 
+
+#if defined(DEBUG_LATENCY)
+void toggleLatencySwitch()
+{
+  latencyToggleSwitch ^= 1;
+
+#if defined(PCBHORUS)
+  if (latencyToggleSwitch)
+    GPIO_ResetBits(EXTMODULE_TX_GPIO, EXTMODULE_TX_GPIO_PIN);
+  else
+    GPIO_SetBits(EXTMODULE_TX_GPIO, EXTMODULE_TX_GPIO_PIN);
+#else
+  if (latencyToggleSwitch)
+    sportUpdatePowerOn();
+  else
+    sportUpdatePowerOff();
+#endif
+}
+#endif
+
+
 void per10ms()
 {
   g_tmr10ms++;
@@ -117,7 +142,15 @@ void per10ms()
   else
     trimsDisplayMask = 0;
 #endif
-
+  
+#if defined(DEBUG_LATENCY_END_TO_END)
+  static tmr10ms_t lastLatencyToggle = 0;
+  if (g_tmr10ms - lastLatencyToggle == 10) {
+    lastLatencyToggle = g_tmr10ms;
+    toggleLatencySwitch();
+  }
+#endif
+  
 #if defined(RTCLOCK)
   /* Update global Date/Time every 100 per10ms cycles */
   if (++g_ms100 == 100) {
@@ -1741,6 +1774,15 @@ void doMixerCalculations()
   static tmr10ms_t lastTMR = 0;
 
   tmr10ms_t tmr10ms = get_tmr10ms();
+
+#if defined(DEBUG_LATENCY_MIXER_RF) || defined(DEBUG_LATENCY_RF_ONLY)
+  static tmr10ms_t lastLatencyToggle = 0;
+  if (tmr10ms - lastLatencyToggle >= 10) {
+    lastLatencyToggle = tmr10ms;
+    toggleLatencySwitch();
+  }
+#endif  
+  
   uint8_t tick10ms = (tmr10ms >= lastTMR ? tmr10ms - lastTMR : 1);
   // handle tick10ms overrun
   // correct overflow handling costs a lot of code; happens only each 11 min;
